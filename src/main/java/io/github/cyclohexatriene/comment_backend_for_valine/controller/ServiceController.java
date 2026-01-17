@@ -28,7 +28,7 @@ import java.util.*;
 @RestController
 @RequestMapping("/1.1")
 @Slf4j
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class ServiceController {
 
     @Autowired
