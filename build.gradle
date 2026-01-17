@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'io.github.cyclohexatriene'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.1'
 description = 'a backend service for valine'
 
 java {
@@ -45,4 +45,9 @@ tasks.register('mybatisGenerate', JavaExec) {
 	classpath = configurations.compileClasspath + sourceSets.main.runtimeClasspath
 	mainClass = 'org.mybatis.generator.api.ShellRunner'
 	args = ['-configfile', 'src/main/resources/generatorConfig.xml', '-overwrite']
+}
+
+bootJar {
+	archiveBaseName = 'comment-backend-for-valine'
+	archiveVersion = '0.0.1'
 }
