@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'io.github.cyclohexatriene'
-version = '0.0.1'
+version = '0.0.1.1'
 description = 'a backend service for valine'
 
 java {
@@ -49,5 +49,5 @@ tasks.register('mybatisGenerate', JavaExec) {
 
 bootJar {
 	archiveBaseName = 'comment-backend-for-valine'
-	archiveVersion = '0.0.1'
+	archiveVersion = '0.0.1.1'
 }
