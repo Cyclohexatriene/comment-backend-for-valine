@@ -1,3 +1,4 @@
 # comment-backend-for-valine
 LeanCloud将于2027年停止服务，届时评论插件Valine将无法使用。为解决该问题，本项目基于Spring Boot实现了一个自建评论服务，完全兼容LeanCloud原有的API协议，部署后，只需要修改Valine配置文件中的serverURLs参数，即可取代LeanCloud的服务。
+
 感谢DeepSeek对本项目的大力支持。
