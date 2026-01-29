@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface CommentMapper {
+
     long countByExample(CommentExample example);
 
     int deleteByExample(CommentExample example);
@@ -27,4 +28,7 @@ public interface CommentMapper {
     int updateByPrimaryKeySelective(Comment row);
 
     int updateByPrimaryKey(Comment row);
+
+    List<Comment> selectAll();
+
 }

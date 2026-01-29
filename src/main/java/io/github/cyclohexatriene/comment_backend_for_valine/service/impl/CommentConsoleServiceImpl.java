@@ -33,4 +33,9 @@ public class CommentConsoleServiceImpl implements CommentConsoleService {
         }
     }
 
+    @Override
+    public List<CommentDTO> pullAllComments() {
+        return CommentConverter.convertList(commentRepository.selectAllComments());
+    }
+
 }

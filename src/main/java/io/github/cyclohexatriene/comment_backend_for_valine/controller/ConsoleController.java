@@ -1,7 +1,10 @@
 package io.github.cyclohexatriene.comment_backend_for_valine.controller;
 
 import io.github.cyclohexatriene.comment_backend_for_valine.controller.request.ImportByJsonRequest;
+import io.github.cyclohexatriene.comment_backend_for_valine.controller.request.PullAllCommentsRequest;
 import io.github.cyclohexatriene.comment_backend_for_valine.controller.response.ImportByJsonResult;
+import io.github.cyclohexatriene.comment_backend_for_valine.controller.response.PullAllCommentsResult;
+import io.github.cyclohexatriene.comment_backend_for_valine.dto.CommentDTO;
 import io.github.cyclohexatriene.comment_backend_for_valine.service.CommentConsoleService;
 import io.github.cyclohexatriene.comment_backend_for_valine.utils.JsonUtils;
 import io.micrometer.common.util.StringUtils;
@@ -9,11 +12,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @RestController
@@ -50,6 +51,31 @@ public class ConsoleController {
         } catch (Exception e) {
             log.error("ConsoleController.importComments error, request: {}", JsonUtils.toJson(request), e);
             return ResponseEntity.internalServerError().body(ImportByJsonResult.ofFail("服务异常"));
+        }
+    }
+
+    /**
+     * 拉取全量数据，用于备份
+     */
+    @GetMapping("/pullAllComments")
+    public ResponseEntity<PullAllCommentsResult> pullAllComments(@RequestBody PullAllCommentsRequest request) {
+        try {
+            // 校验入参
+            if (Objects.isNull(request)) {
+                log.error("ConsoleController.pullAllComments error, invalid request");
+                return ResponseEntity.badRequest().body(PullAllCommentsResult.ofFail("入参异常"));
+            }
+            // 校验控制台密码
+            if (!Objects.equals(request.getPassword(), consolePassword)) {
+                log.error("ConsoleController.pullAllComments error, invalid password");
+                return ResponseEntity.badRequest().body(PullAllCommentsResult.ofFail("密码错误"));
+            }
+            // 拉取数据
+            List<CommentDTO> commentList = commentConsoleService.pullAllComments();
+            return ResponseEntity.ok().body(PullAllCommentsResult.ofSuccess(commentList));
+        } catch (Exception e) {
+            log.error("ConsoleController.pullAllComments error, request: {}", JsonUtils.toJson(request), e);
+            return ResponseEntity.internalServerError().body(PullAllCommentsResult.ofFail("服务异常"));
         }
     }
 

@@ -16,4 +16,6 @@ public interface CommentRepository {
 
     Comment selectByObjectId(String objectId);
 
+    List<Comment> selectAllComments();
+
 }

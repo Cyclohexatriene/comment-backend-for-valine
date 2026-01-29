@@ -59,4 +59,9 @@ public class CommentRepositoryImpl implements CommentRepository {
         return commentList.get(0);
     }
 
+    @Override
+    public List<Comment> selectAllComments() {
+        return mapper.selectAll();
+    }
+
 }
