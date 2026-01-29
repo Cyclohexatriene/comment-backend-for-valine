@@ -57,7 +57,7 @@ public class ConsoleController {
     /**
      * 拉取全量数据，用于备份
      */
-    @GetMapping("/pullAllComments")
+    @PostMapping("/pullAllComments")
     public ResponseEntity<PullAllCommentsResult> pullAllComments(@RequestBody PullAllCommentsRequest request) {
         try {
             // 校验入参
