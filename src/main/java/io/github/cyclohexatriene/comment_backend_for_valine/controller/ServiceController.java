@@ -28,10 +28,6 @@ import java.util.*;
 @RestController
 @RequestMapping("/1.1")
 @Slf4j
-@CrossOrigin(
-        origins = "*",
-        allowedHeaders = "*",
-        methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS})
 public class ServiceController {
 
     @Autowired
