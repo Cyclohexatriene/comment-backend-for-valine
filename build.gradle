@@ -49,5 +49,5 @@ tasks.register('mybatisGenerate', JavaExec) {
 
 bootJar {
 	archiveBaseName = 'comment-backend-for-valine'
-	archiveVersion = '1.0.1'
+	archiveVersion = '1.0.2'
 }
